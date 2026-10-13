@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:ruta*",
-      "destination": "https://CAMBIAR-POR-TU-BACKEND.vercel.app/api/:ruta*"
+      "destination": "https://gymproyect-56zh.vercel.app/*"
     },
     {
       "source": "/(.*)",
