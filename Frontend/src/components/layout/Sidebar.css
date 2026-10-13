@@ -1,0 +1,193 @@
+/* ---------- Barra lateral (escritorio) ---------- */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--ancho-sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 28px 16px 20px;
+  background: var(--fondo-sidebar);
+  border-right: 1px solid var(--borde);
+  z-index: 10;
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.sidebar__logo-icono {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--acento);
+  color: #fff;
+}
+
+.sidebar__logo-texto {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  color: var(--texto-suave);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar__link:hover {
+  background: var(--superficie-hover);
+  color: var(--texto);
+}
+
+.sidebar__link--activo {
+  background: var(--acento-suave);
+  color: var(--texto);
+}
+
+.sidebar__link--activo svg {
+  color: var(--acento-claro);
+}
+
+/* Usuario abajo de todo */
+.sidebar__usuario {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  transition: background 0.15s;
+}
+
+.sidebar__usuario:hover,
+.sidebar__usuario--activo {
+  background: var(--superficie-hover);
+}
+
+.sidebar__usuario--activo .sidebar__ajustes {
+  color: var(--acento-claro);
+}
+
+/* el link de Ajustes del menú solo aparece en el celular */
+.sidebar__link--celular {
+  display: none;
+}
+
+.sidebar__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--acento-suave);
+  color: var(--acento-claro);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sidebar__usuario-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sidebar__usuario-datos strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sidebar__ajustes {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--texto-tenue);
+}
+
+.sidebar__usuario:hover .sidebar__ajustes {
+  color: var(--texto);
+}
+
+/* ---------- Tablet: solo íconos ---------- */
+@media (max-width: 1024px) {
+  .sidebar {
+    align-items: center;
+    padding-inline: 12px;
+  }
+  .sidebar__logo-texto,
+  .sidebar__link span,
+  .sidebar__usuario-datos {
+    display: none;
+  }
+  .sidebar__logo {
+    padding: 0;
+  }
+  .sidebar__link {
+    justify-content: center;
+    padding: 12px;
+  }
+  .sidebar__usuario {
+    padding-inline: 0;
+    justify-content: center;
+  }
+}
+
+/* ---------- Celular: barra de navegación abajo ---------- */
+@media (max-width: 640px) {
+  .sidebar {
+    inset: auto 0 0 0;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+    border-right: none;
+    border-top: 1px solid var(--borde);
+  }
+  .sidebar__logo,
+  .sidebar__usuario {
+    display: none;
+  }
+  .sidebar__nav {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .sidebar__link {
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 8px;
+    font-size: 11px;
+    background: none;
+  }
+  .sidebar__link span {
+    display: block;
+  }
+  .sidebar__link--celular {
+    display: flex;
+  }
+  .sidebar__link--activo {
+    background: none;
+    color: var(--acento-claro);
+  }
+}

@@ -1,0 +1,403 @@
+.principal {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.principal__header {
+  margin-bottom: 28px;
+}
+
+.principal__fecha {
+  margin: 0 0 6px;
+  color: var(--texto-tenue);
+  font-size: 14px;
+}
+
+/* solo la primera letra en mayúscula ("Sábado, 10 de octubre") */
+.principal__fecha::first-letter {
+  text-transform: uppercase;
+}
+
+.principal__header h1 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Grilla: 3 columnas en escritorio */
+.principal__grilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.hoy,
+.semana {
+  grid-column: span 2;
+}
+
+/* ---------- Tarjeta base ---------- */
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.tarjeta__titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--texto-suave);
+}
+
+.tarjeta__titulo h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.tarjeta__link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--acento-claro);
+}
+
+.tarjeta__link:hover {
+  text-decoration: underline;
+}
+
+.texto-suave {
+  margin: 0;
+  color: var(--texto-tenue);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.etiqueta {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--acento-claro);
+}
+
+/* ---------- Hoy ---------- */
+.hoy {
+  justify-content: center;
+  gap: 8px;
+  background:
+    radial-gradient(circle at 100% 0%, var(--acento-suave), transparent 60%),
+    var(--superficie);
+}
+
+.hoy__nombre {
+  margin: 0;
+  font-size: clamp(24px, 3.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hoy__detalle {
+  margin: 0 0 14px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.boton {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--acento);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.boton:hover {
+  background: var(--acento-hover);
+}
+
+.boton:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Objetivo ---------- */
+.objetivo__nombre {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.objetivo__progreso {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.objetivo__fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.objetivo__fila strong {
+  color: var(--texto);
+}
+
+.barra {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--superficie-hover);
+  overflow: hidden;
+}
+
+.barra__relleno {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--acento);
+}
+
+/* ---------- Semana ---------- */
+.semana__dias {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.dia__circulo {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--borde-fuerte);
+  color: #fff;
+}
+
+.dia__letra {
+  font-size: 12px;
+  color: var(--texto-tenue);
+}
+
+.dia--hecho .dia__circulo {
+  background: var(--acento);
+  border-color: var(--acento);
+}
+
+.dia--hoy .dia__circulo {
+  box-shadow: 0 0 0 3px var(--fondo), 0 0 0 5px var(--acento-claro);
+}
+
+.dia--hoy .dia__letra {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.dia--futuro .dia__circulo {
+  border-style: dashed;
+  opacity: 0.6;
+}
+
+.semana__datos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--borde);
+}
+
+.dato {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dato strong {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.dato span {
+  font-size: 13px;
+  color: var(--texto-tenue);
+}
+
+/* ---------- Próximas rutinas ---------- */
+.proximas__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proxima {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin: 0 -12px;
+  border-radius: 12px;
+  transition: background 0.15s;
+}
+
+.proxima:hover {
+  background: var(--superficie-hover);
+}
+
+.proxima > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.proxima__nombre {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.proxima__chevron {
+  color: var(--texto-tenue);
+}
+
+.chip {
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--superficie-hover);
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chip--hoy {
+  background: var(--acento-suave);
+  color: var(--acento-claro);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .principal__grilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hoy,
+  .semana {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .principal__grilla {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+  .hoy,
+  .semana {
+    grid-column: auto;
+  }
+  .tarjeta {
+    padding: 20px;
+  }
+  .semana__datos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 18px;
+  }
+  .dia__circulo {
+    width: 32px;
+    height: 32px;
+  }
+  .boton {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
+/* ---------- Tarjeta "Comenzar entreno" ---------- */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.etiqueta--hecho {
+  color: #6ee7b7;
+}
+
+.hoy--en-curso {
+  border-color: var(--acento);
+}
+
+.hoy__reloj {
+  color: var(--texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.punto-vivo {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f0606a;
+  animation: latido 1.4s ease-in-out infinite;
+}
+
+@keyframes latido {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ---------- Ventana "Elegir entreno" ---------- */
+.elegir__paso {
+  margin: 4px 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-tenue);
+}
+
+.elegir__rutinas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.elegir .modal__lista button {
+  gap: 10px;
+}
+
+.elegir .modal__lista button > span:first-child {
+  flex: 1;
+}
+
+.elegir .modal__lista button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}

@@ -1,0 +1,234 @@
+.sesion {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background:
+    radial-gradient(circle at 50% -10%, var(--acento-suave), transparent 55%),
+    var(--fondo);
+}
+
+.sesion__caja {
+  width: 100%;
+  max-width: 400px;
+  padding: 36px 32px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 22px;
+}
+
+.sesion__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.sesion__logo-icono {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--acento);
+  color: #fff;
+}
+
+.sesion__titulo {
+  margin: 0 0 6px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sesion__subtitulo {
+  margin: 0 0 24px;
+  text-align: center;
+  color: var(--texto-tenue);
+  font-size: 14px;
+}
+
+/* ---------- Pestañas ---------- */
+.sesion__pestanas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+}
+
+.sesion__pestanas button {
+  padding: 9px;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  color: var(--texto-tenue);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sesion__pestanas button.activa {
+  background: var(--superficie-hover);
+  color: var(--texto);
+}
+
+/* ---------- Formulario ---------- */
+.sesion__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--texto-suave);
+}
+
+.campo__input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 12px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px; /* 16px evita que el iPhone haga zoom al tocar el campo */
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+.campo__input:has(.campo__ojo) input {
+  padding-right: 46px;
+}
+
+.campo__ojo {
+  position: absolute;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--texto-tenue);
+  cursor: pointer;
+}
+
+.campo__ojo:hover {
+  color: var(--texto);
+}
+
+.campo--error input {
+  border-color: #f0606a;
+}
+
+.campo__mensaje {
+  font-size: 12.5px;
+  color: #ff8a92;
+}
+
+.sesion__olvido {
+  align-self: flex-end;
+  margin-top: -6px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--acento-claro);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sesion__error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(240, 96, 106, 0.12);
+  color: #ff8a92;
+  font-size: 13.5px;
+}
+
+.sesion__boton {
+  margin-top: 4px;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: var(--acento);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sesion__boton:hover:not(:disabled) {
+  background: var(--acento-hover);
+}
+
+.sesion__boton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.sesion__cambiar {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--texto-tenue);
+}
+
+.sesion__cambiar button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--acento-claro);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .sesion {
+    place-items: start center;
+    padding-top: 48px;
+  }
+  .sesion__caja {
+    padding: 28px 20px;
+    border: none;
+    background: none;
+  }
+}

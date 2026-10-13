@@ -1,0 +1,27 @@
+{
+  "name": "gymtrack-backend",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API de GymTrack: usuarios, rutinas, ejercicios y entrenamientos",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "postinstall": "prisma generate",
+    "db:migrar": "prisma migrate dev",
+    "db:aplicar": "prisma migrate deploy",
+    "db:ver": "prisma studio",
+    "usuario-prueba": "node scripts/crearUsuarioPrueba.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.0"
+  }
+}

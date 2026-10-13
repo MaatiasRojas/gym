@@ -1,0 +1,579 @@
+.entreno {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ---------- Sin entrenamiento ---------- */
+.entreno--vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 15vh;
+  text-align: center;
+  color: var(--texto-tenue);
+}
+
+.entreno--vacio h1 {
+  margin: 8px 0 0;
+  font-size: 22px;
+  color: var(--texto);
+}
+
+.entreno--vacio .boton {
+  align-self: center;
+  margin-top: 8px;
+}
+
+/* ---------- Cabecera fija con cronómetro ---------- */
+.entreno__cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px 16px;
+  margin: -16px -16px 20px;
+  padding: 16px;
+  border-bottom: 1px solid var(--borde);
+  background: color-mix(in srgb, var(--fondo) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.entreno__titulo h1 {
+  margin: 4px 0 0;
+  font-size: clamp(20px, 3.4vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entreno__reloj {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--superficie);
+  color: var(--acento-claro);
+}
+
+.entreno__reloj span {
+  color: var(--texto);
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.entreno__finalizar {
+  align-self: center;
+}
+
+.entreno__progreso {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--texto-tenue);
+  white-space: nowrap;
+}
+
+.entreno__progreso .barra {
+  flex: 1;
+}
+
+/* ---------- Ejercicios ---------- */
+.entreno__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ej-vivo {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  transition: border-color 0.2s;
+}
+
+.ej-vivo__contenido {
+  min-width: 0;
+}
+
+/* ---------- Cronómetro de descanso (uno por ejercicio) ---------- */
+.crono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--fondo);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.crono--activo {
+  border-color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 8%, var(--fondo));
+}
+
+.crono--listo {
+  border-color: #34d399;
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.crono__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--texto-tenue);
+}
+
+.crono--activo .crono__label {
+  color: var(--acento-claro);
+}
+
+.crono--listo .crono__label {
+  color: #6ee7b7;
+}
+
+.crono__anillo {
+  position: relative;
+  width: 118px;
+  height: 118px;
+}
+
+.crono__anillo svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.crono__pista {
+  fill: none;
+  stroke: var(--borde-fuerte);
+  stroke-width: 7;
+}
+
+.crono__progreso {
+  fill: none;
+  stroke: var(--texto-tenue);
+  stroke-width: 7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.25s linear, stroke 0.2s;
+}
+
+.crono--activo .crono__progreso {
+  stroke: var(--acento);
+}
+
+.crono--listo .crono__progreso {
+  stroke: #34d399;
+}
+
+.crono__anillo strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--texto);
+}
+
+.crono--listo .crono__anillo strong {
+  color: #6ee7b7;
+}
+
+.crono__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.crono__ajustar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.crono__ajustar button,
+.crono__principal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.crono__ajustar button:hover {
+  background: var(--superficie-hover);
+}
+
+.crono__principal {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento-claro);
+}
+
+.crono__principal:hover {
+  background: color-mix(in srgb, var(--acento) 28%, transparent);
+}
+
+.crono__principal--saltar {
+  border-color: var(--acento);
+  background: var(--acento);
+  color: #fff;
+}
+
+.crono__principal--saltar:hover {
+  background: var(--acento-hover);
+}
+
+.ej-vivo--completo {
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+.ej-vivo--completo .fila__numero {
+  background: rgba(52, 211, 153, 0.18);
+  color: #6ee7b7;
+}
+
+.ej-vivo__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ej-vivo__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ej-vivo__nombre {
+  margin: 2px 0 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ej-vivo__tags {
+  justify-content: flex-end;
+}
+
+/* Tabla de series */
+.series {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.serie {
+  display: grid;
+  grid-template-columns: 44px minmax(70px, 1fr) minmax(70px, 1fr) minmax(60px, 1fr) 46px;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 12px;
+  transition: background 0.15s;
+}
+
+.serie--titulos {
+  padding-block: 0;
+  font-size: 12px;
+  color: var(--texto-tenue);
+}
+
+.serie--titulos span {
+  text-align: center;
+}
+
+.serie__numero {
+  text-align: center;
+  font-weight: 700;
+  color: var(--texto-suave);
+}
+
+.serie__anterior {
+  text-align: center;
+  font-size: 14px;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.serie input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.serie input::placeholder {
+  color: var(--texto-tenue);
+  font-weight: 400;
+}
+
+.serie input:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+.serie__check {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 44px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--fondo);
+  color: var(--texto-tenue);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.serie__check:hover {
+  border-color: #34d399;
+  color: #6ee7b7;
+}
+
+.serie--hecha {
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.serie--hecha input {
+  border-color: transparent;
+  background: transparent;
+}
+
+.serie--hecha .serie__check {
+  border-color: #34d399;
+  background: #34d399;
+  color: #06281c;
+}
+
+.ej-vivo__pie {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.ej-vivo__pie button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.ej-vivo__pie button:hover {
+  background: var(--superficie-hover);
+  color: var(--texto);
+}
+
+.ej-vivo__fecha {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--texto-tenue);
+}
+
+.entreno__acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.entreno__acciones .boton {
+  align-self: auto;
+}
+
+/* ---------- Resumen ---------- */
+.resumen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 24px;
+}
+
+.resumen h1 {
+  margin: 14px 0 4px;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.resumen__icono {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.16);
+  color: #6ee7b7;
+}
+
+.resumen__datos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 28px 0 20px;
+}
+
+.resumen__datos .dato {
+  align-items: center;
+  padding: 16px 8px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--superficie);
+}
+
+.resumen__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.resumen__lista li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--superficie);
+}
+
+.resumen .boton {
+  align-self: center;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .entreno__cabecera {
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin: -24px -16px 16px;
+    padding: 14px 16px;
+  }
+  .entreno__finalizar {
+    display: none; /* en el celular se usa el botón de abajo */
+  }
+  .entreno__reloj span {
+    font-size: 20px;
+  }
+  .ej-vivo {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 12px;
+  }
+  /* En el celular el cronómetro va arriba, como una franja */
+  .crono {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'anillo label'
+      'anillo acciones';
+    align-items: center;
+    justify-items: start;
+    gap: 6px 14px;
+    padding: 10px 12px;
+  }
+  .crono__anillo {
+    grid-area: anillo;
+    width: 74px;
+    height: 74px;
+  }
+  .crono__anillo strong {
+    font-size: 18px;
+  }
+  .crono__label {
+    grid-area: label;
+    align-self: end;
+  }
+  .crono__acciones {
+    grid-area: acciones;
+    flex-direction: row;
+    align-self: start;
+  }
+  .crono__ajustar {
+    flex: 1;
+  }
+  .crono__principal {
+    flex: 1;
+    padding: 9px 10px;
+  }
+  .ej-vivo__tags {
+    display: none;
+  }
+  .serie {
+    grid-template-columns: 30px minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr) 44px;
+    gap: 6px;
+  }
+  .serie__anterior {
+    font-size: 12.5px;
+  }
+  .resumen__datos {
+    grid-template-columns: 1fr 1fr;
+  }
+  .entreno__acciones {
+    flex-direction: column-reverse;
+  }
+  .entreno__acciones .boton {
+    justify-content: center;
+  }
+}

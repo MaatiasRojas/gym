@@ -1,0 +1,87 @@
+// Esquema de la base de datos (PostgreSQL en Neon), manejado con Prisma.
+//
+// Después de cambiar este archivo:
+//   npm run db:migrar -- --name descripcion-del-cambio
+// Eso crea la migración en prisma/migrations, la aplica en la base y regenera el cliente.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // conexión con pooling (la que usa la app)
+  directUrl = env("DIRECT_URL") // conexión directa (la que usan las migraciones)
+}
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique // se guarda siempre en minúsculas
+  passwordHash String   @map("password_hash")
+  // Perfil, objetivo y preferencias: { nombre, apellido, metaSemanal, sonido, ... }
+  ajustes      Json     @default("{}")
+  creado       DateTime @default(now())
+
+  ejercicios     Ejercicio[]
+  rutinas        Rutina[]
+  entrenamientos Entrenamiento[]
+
+  @@map("usuarios")
+}
+
+// Biblioteca de ejercicios: cada usuario tiene la suya (empieza con los ejercicios base)
+model Ejercicio {
+  id            Int      @id @default(autoincrement())
+  usuarioId     Int      @map("usuario_id")
+  nombre        String
+  musculos      String[]
+  descripcion   String   @default("")
+  consejos      String[]
+  errores       String[]
+  variantes     String[]
+  imagen        String? // imagen en base64 (data URL)
+  personalizado Boolean  @default(false) // true = lo creó el usuario
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@map("ejercicios")
+}
+
+model Rutina {
+  id            Int    @id @default(autoincrement())
+  usuarioId     Int    @map("usuario_id")
+  nombre        String
+  objetivo      String @default("")
+  diasPorSemana Int    @map("dias_por_semana")
+  // Días con sus ejercicios:
+  // [{ "nombre": "Pecho", "ejercicios": [{ "uid": "a1", "ejercicioId": 3, "series": 4, "reps": "8 - 10", "descanso": 90 }] }]
+  dias          Json   @default("[]")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@map("rutinas")
+}
+
+// Entrenamientos terminados
+model Entrenamiento {
+  id           Int      @id @default(autoincrement())
+  usuarioId    Int      @map("usuario_id")
+  inicio       DateTime
+  fin          DateTime
+  duracionSeg  Int      @map("duracion_seg")
+  rutinaId     Int?     @map("rutina_id") // sin relación: si se borra la rutina, el historial queda
+  rutinaNombre String   @default("") @map("rutina_nombre")
+  diaIndice    Int      @default(0) @map("dia_indice")
+  diaNombre    String   @default("") @map("dia_nombre")
+  volumen      Int      @default(0)
+  // Series hechas: [{ "ejercicioId": 3, "series": [{ "peso": 60, "reps": 10 }] }]
+  ejercicios   Json     @default("[]")
+  demo         Boolean  @default(false) // true = dato de ejemplo
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, inicio])
+  @@map("entrenamientos")
+}
